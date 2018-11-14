@@ -2,7 +2,8 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
-
+void userInput();
+void gameLogic();
 enum keyboardControls {
 	LEFT,
 	RIGHT,
@@ -18,6 +19,9 @@ char dotDotDot[3][4] = {
 	".. ",
 	"..."
 };
+int x = 1;
+int y = 1;
+bool control_array[5];
 char gameMap[20][41] = {
 	"########################################",
 	"#                                      #",
@@ -41,30 +45,65 @@ char gameMap[20][41] = {
 	"########################################",
 };
 
-void renderGame() {
+void waitForUserInput(std::string textStart, std::string textMiddle,std::string textEnd = "continue") {
+	bool waiting = true;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, 12);							//remember to change it back
-	for (int printDots = 3; printDots < 3; printDots++) {
-		std::cout << "Press any key to begin" << dotDotDot << std::endl;
+	SetConsoleTextAttribute(hConsole, 12);							//remember to change colour back
+	while(waiting) {
+		for (int printDot = 0; printDot < 3; printDot++) {
+			std::cout << textStart << ", press " << textMiddle << " to " << textEnd << dotDotDot[printDot] << std::endl;
+			Sleep(500);
+			system("cls");
+			userInput();
+			if (control_array[4]) {
+				waiting = false;
+
+			}
+		}
 
 	}
-    system("cls");
-	for (int printGameMap = 0; printGameMap < 20; printGameMap++) {
-		std::cout << gameMap[printGameMap] << std::endl;
+}
+
+void renderGame() {
+	waitForUserInput("Good luck", "ENTER", "begin"); //might want to move this to the end of the future menu function
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //changing colour back
+	SetConsoleTextAttribute(hConsole, 11);
+	while (inGame) {
+		system("cls");
+		for (int printGameMap = 0; printGameMap < 20; printGameMap++) {
+			std::cout << gameMap[printGameMap] << std::endl;
+		}
+		gameLogic();
+
+		system("pause>nul");
 	}
-	system("pause>nul");
-	
+}
+
+void gameLogic() {
+	userInput();
+	if (control_array[2]) {
+		int y2 = y - 1;
+		if (gameMap[y2][x] == ' ') {
+			gameMap[y][x] = ' ';
+			y--;
+			gameMap[y][x] = '-';
+			
+			std::cout << "up" << std::endl;
+		}
+	if (control_array[3]) {
+		int y2 = y + 1;
+		if (gameMap[y2][x] == ' ') {
+			gameMap[y][x] = ' ';
+			y += 1;
+			gameMap[y][x] = 'v';
+			
+			std::cout << "down" << std::endl;
+		}
+	}
+	}
 }
 
 void userInput() {
-	bool control_array[5]{
-		RIGHT,
-		LEFT,
-		UP,
-		DOWN,
-		ENTER
-	};
-
 	for (int makeKeyStateFalse = 0; makeKeyStateFalse < 5; makeKeyStateFalse++) {
 		control_array[makeKeyStateFalse] = false;
 	}
@@ -113,10 +152,10 @@ void userInput() {
 
 int main()
 {
-	while (inMenu) { //note: inMenu is false right now
+	SetConsoleTitle(TEXT("daerware (the game)"));
+	while (inMenu) { //reminder: inMenu is false right now
 
 	}
-	while (inGame) {
-		renderGame();
-	}
+	renderGame();
+	
 }

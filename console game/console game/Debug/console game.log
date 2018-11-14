@@ -1,2 +1,4 @@
 ﻿  console game.cpp
+c:\users\doubl\documents\github\cpp-console-game\console game\console game\console game.cpp(76): warning C4838: conversion from 'keyboardControls' to 'bool' requires a narrowing conversion
+c:\users\doubl\documents\github\cpp-console-game\console game\console game\console game.cpp(76): warning C4305: 'initializing': truncation from 'keyboardControls' to 'bool'
   console game.vcxproj -> C:\Users\doubl\Documents\GitHub\cpp-console-game\console game\Debug\console game.exe
