@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
+#include "GenerateGraphics.h"
 void userInput();
 void gameLogic();
 enum keyboardControls {
@@ -18,6 +19,15 @@ char dotDotDot[3][4] = {
 	".  ",
 	".. ",
 	"..."
+};
+char daerwareIntro[7][55] = {
+	"      _                                               ",
+	"     | |                                              ",
+	"   __| |  __ _   ___  _ __ __      __ __ _  _ __  ___ ",
+	"  / _` | / _` | / _ \| '__|\ \ /\ / // _` || '__|/ _ \\",
+	" | (_| || (_| ||  __/| |    \ V  V /| (_| || |  |  __/",
+	"  \__,_| \__,_| \___||_|     \_/\_/  \__,_||_|   \___|",
+	"                                                      "
 };
 int x = 1;
 int y = 1;
