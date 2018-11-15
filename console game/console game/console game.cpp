@@ -12,6 +12,7 @@ enum keyboardControls {
 	UP,
 	ENTER
 };
+std::string daerwareText = "      _                                               \n     | |                                              \n   __| |  __ _   ___  _ __ __      __ __ _  _ __  ___ \n  / _` | / _` | / _ \\| '__|\\ \\ /\\ / // _` || '__|/ _ \\\n | (_| || (_| ||  __/| |    \\ V  V /| (_| || |  |  __/\n  \\__,_| \\__,_| \\___||_|     \\_/\\_/  \\__,_||_|   \\___|\n                                                      ";
 bool inMenu = false; //false until i make menu
 bool inGame = true;
 bool playerAlive = true;
@@ -20,7 +21,7 @@ char dotDotDot[3][4] = {
 	".. ",
 	"..."
 };
-char daerwareIntro[7][55] = {
+/*char daerwareIntro[7][55] = {
 	"      _                                               ",
 	"     | |                                              ",
 	"   __| |  __ _   ___  _ __ __      __ __ _  _ __  ___ ",
@@ -29,6 +30,7 @@ char daerwareIntro[7][55] = {
 	"  \__,_| \__,_| \___||_|     \_/\_/  \__,_||_|   \___|",
 	"                                                      "
 };
+*/
 int x = 1;
 int y = 1;
 bool control_array[5];
@@ -163,6 +165,8 @@ void userInput() {
 int main()
 {
 	SetConsoleTitle(TEXT("daerware (the game)"));
+	GenerateGraphics startObj;
+	startObj.printIntro();
 	while (inMenu) { //reminder: inMenu is false right now
 
 	}
