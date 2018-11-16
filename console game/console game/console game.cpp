@@ -5,6 +5,17 @@
 #include "GenerateGraphics.h"
 void userInput();
 void gameLogic();
+int BLACK = 0;
+int BLUE = 1;
+int GREEN = 2;
+int CYAN = 3;
+int RED = 4;
+int MAGENTA = 5;
+int BROWN = 6;
+int LIGHTGRAY = 7;
+int DARKGRAY = 8;
+int YELLOW = 14;
+int WHITE = 15;
 enum keyboardControls {
 	LEFT,
 	RIGHT,
@@ -56,14 +67,14 @@ char gameMap[20][41] = {
 	"#                                      #",
 	"########################################",
 };
-
+/*
 void waitForUserInput(std::string textStart, std::string textMiddle,std::string textEnd = "continue") {
 	bool waiting = true;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 12);							//remember to change colour back
 	while(waiting) {
 		for (int printDot = 0; printDot < 3; printDot++) {
-			std::cout << textStart << ", press " << textMiddle << " to " << textEnd << dotDotDot[printDot] << std::endl;
+			std::cout << textStart << "ress " << textMiddle << " to " << textEnd << dotDotDot[printDot] << std::endl;
 			Sleep(500);
 			system("cls");
 			userInput();
@@ -75,9 +86,13 @@ void waitForUserInput(std::string textStart, std::string textMiddle,std::string 
 
 	}
 }
+*/
 
 void renderGame() {
-	waitForUserInput("Good luck", "ENTER", "begin"); //might want to move this to the end of the future menu function
+	//waitForUserInput("Good luck, p", "ENTER", "begin"); //might want to move this to the end of the future menu function
+	std::string sayAtGameStart = "Good luck! Press ENTER to begin.";
+	GenerateGraphics TextObj;
+	TextObj.printText(sayAtGameStart, RED, 90, true);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //changing colour back
 	SetConsoleTextAttribute(hConsole, 11);
 	while (inGame) {
@@ -166,7 +181,7 @@ int main()
 {
 	SetConsoleTitle(TEXT("daerware (the game)"));
 	GenerateGraphics startObj;
-	startObj.printIntro();
+	startObj.printText(daerwareText, CYAN, 5, false);
 	while (inMenu) { //reminder: inMenu is false right now
 
 	}
