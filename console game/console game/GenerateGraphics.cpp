@@ -20,7 +20,7 @@ GenerateGraphics::GenerateGraphics()
 	
 }
 
-void GenerateGraphics::printText(std::string the_text, int& whatColour, int sleepTime, bool pauseAfter){
+void GenerateGraphics::printText(std::string the_text, int& whatColour, int sleepTime, int pauseAfter){
 	int x = 0; 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, whatColour);
@@ -30,11 +30,9 @@ void GenerateGraphics::printText(std::string the_text, int& whatColour, int slee
 		Sleep(sleepTime);
 		x++;
 	};
-	while (pauseAfter) {
-		//userInput();
-		system("pause>nul");
-	}
+	
 	std::cout << "\n" << std::endl;
+	Sleep(pauseAfter);
 }
 
 

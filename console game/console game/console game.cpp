@@ -5,17 +5,22 @@
 #include "GenerateGraphics.h"
 void userInput();
 void gameLogic();
-int BLACK = 0;
-int BLUE = 1;
-int GREEN = 2;
-int CYAN = 3;
-int RED = 4;
-int MAGENTA = 5;
-int BROWN = 6;
-int LIGHTGRAY = 7;
-int DARKGRAY = 8;
-int YELLOW = 14;
-int WHITE = 15;
+#define Black 0
+#define Blue 1
+#define Green 2
+#define Cyan 3
+#define Red 4
+#define Magenta 5
+#define Yellow 6
+#define White 7
+#define Gray 8
+#define LightBlue 9
+#define LightGreen 10
+#define LightCyan 11
+#define LightRed 12
+#define LightMagenta 13
+#define LightYellow 14
+#define BrightWhite 15
 enum keyboardControls {
 	LEFT,
 	RIGHT,
@@ -89,40 +94,40 @@ void waitForUserInput(std::string textStart, std::string textMiddle,std::string 
 */
 
 void renderGame() {
-	//waitForUserInput("Good luck, p", "ENTER", "begin"); //might want to move this to the end of the future menu function
-	std::string sayAtGameStart = "Good luck! Press ENTER to begin.";
-	GenerateGraphics TextObj;
-	TextObj.printText(sayAtGameStart, RED, 90, true);
+
+	std::string sayAtGameStart = "Good luck!";
+	//GenerateGraphics TextObj;
+	//TextObj.printText(sayAtGameStart, RED, 90, 10000);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //changing colour back
 	SetConsoleTextAttribute(hConsole, 11);
 	while (inGame) {
-		system("cls");
-		for (int printGameMap = 0; printGameMap < 20; printGameMap++) {
+		system("cls");																
+		for (int printGameMap = 0; printGameMap < 20; printGameMap++) {				//prints mapp array each frame.
 			std::cout << gameMap[printGameMap] << std::endl;
 		}
-		gameLogic();
 
-		system("pause>nul");
+		userInput();																//check for controls - will change array value accordingly
+		gameLogic();																//check for array value for key input - will draw character accordingly
+		system("pause>nul");														//pause and wait for everything - you're moma accordingly 
 	}
 }
 
 void gameLogic() {
-	userInput();
-	if (control_array[2]) {
-		int y2 = y - 1;
-		if (gameMap[y2][x] == ' ') {
-			gameMap[y][x] = ' ';
-			y--;
-			gameMap[y][x] = '-';
+	if (control_array[2] == true) {                     //if user presses up
+		int y2 = y - 1;							
+		if (gameMap[y2][x] == ' ') {			//if the square above is blank,
+			gameMap[y][x] = ' ';				//make the current square blank,
+			y--;								//change original y value to the value up one
+			gameMap[y][x] = '-';				//and make the new value occupied by -
 			
 			std::cout << "up" << std::endl;
 		}
-	if (control_array[3]) {
+	if (control_array[3] == true) {						//if user presses down
 		int y2 = y + 1;
 		if (gameMap[y2][x] == ' ') {
 			gameMap[y][x] = ' ';
-			y += 1;
-			gameMap[y][x] = 'v';
+			y++;
+			gameMap[y][x] = '-';
 			
 			std::cout << "down" << std::endl;
 		}
@@ -173,18 +178,23 @@ void userInput() {
 
 		control_array[4] = true;
 	}
+	//system("pause>nul");
 }
 
 
 
 int main()
-{
+{	//set window name
 	SetConsoleTitle(TEXT("daerware (the game)"));
-	GenerateGraphics startObj;
-	startObj.printText(daerwareText, CYAN, 5, false);
-	while (inMenu) { //reminder: inMenu is false right now
 
-	}
+	//1. call intro function through GenerateGraphics class
+	//GenerateGraphics startObj;
+	//startObj.printText(daerwareText, CYAN, 5, 500);
+	//2. when passed condition of intro function, call render game
 	renderGame();
+	//while (inMenu) { //reminder: inMenu is false right now
+	//
+	//}
+
 	
 }

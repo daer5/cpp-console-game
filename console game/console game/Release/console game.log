@@ -1,8 +1,7 @@
 ﻿  console game.cpp
-  GenerateGraphics.cpp
   Generating code
-  3 of 82 functions ( 3.7%) were compiled, the rest were copied from previous compilation.
+  1 of 70 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   console game.vcxproj -> C:\Users\doubl\Documents\GitHub\cpp-console-game\console game\Release\console game.exe
