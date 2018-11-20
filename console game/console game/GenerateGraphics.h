@@ -5,7 +5,7 @@ class GenerateGraphics
 {
 public:
 	GenerateGraphics();
-	void printText(std::string the_text, int& whatColour, int sleepTime, int pauseAfter);
+	void printText(std::string the_text, int whatColour, int sleepTime, int pauseAfter);
 	~GenerateGraphics();
 };
 

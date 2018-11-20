@@ -3,8 +3,21 @@
 #include <string>
 #include <Windows.h>
 #include "GenerateGraphics.h"
+
+//function junk
 void userInput();
 void gameLogic();
+
+//starting pos
+int x = 8;
+int y = 1;
+
+//bool stuff
+bool inMenu = false; //false until i make menu
+bool inGame = true;
+bool control_array[6];
+
+//colour stuff
 #define Black 0
 #define Blue 1
 #define Green 2
@@ -21,35 +34,17 @@ void gameLogic();
 #define LightMagenta 13
 #define LightYellow 14
 #define BrightWhite 15
-enum keyboardControls {
-	LEFT,
-	RIGHT,
-	DOWN,
-	UP,
-	ENTER
-};
+
+//string cheese
+std::string sayAtGameStart = "Good luck!";
 std::string daerwareText = "      _                                               \n     | |                                              \n   __| |  __ _   ___  _ __ __      __ __ _  _ __  ___ \n  / _` | / _` | / _ \\| '__|\\ \\ /\\ / // _` || '__|/ _ \\\n | (_| || (_| ||  __/| |    \\ V  V /| (_| || |  |  __/\n  \\__,_| \\__,_| \\___||_|     \\_/\\_/  \\__,_||_|   \\___|\n                                                      ";
-bool inMenu = false; //false until i make menu
-bool inGame = true;
-bool playerAlive = true;
+
+//arrays
 char dotDotDot[3][4] = {
 	".  ",
 	".. ",
 	"..."
 };
-/*char daerwareIntro[7][55] = {
-	"      _                                               ",
-	"     | |                                              ",
-	"   __| |  __ _   ___  _ __ __      __ __ _  _ __  ___ ",
-	"  / _` | / _` | / _ \| '__|\ \ /\ / // _` || '__|/ _ \\",
-	" | (_| || (_| ||  __/| |    \ V  V /| (_| || |  |  __/",
-	"  \__,_| \__,_| \___||_|     \_/\_/  \__,_||_|   \___|",
-	"                                                      "
-};
-*/
-int x = 8;
-int y = 1;
-bool control_array[6];
 char gameMap[20][106] = {
 	"#########################################################################################################",
 	"#      |-                                                                                               #",
@@ -95,22 +90,11 @@ void waitForUserInput(std::string textStart, std::string textMiddle,std::string 
 */
 
 void renderGame() {
-
-	std::string sayAtGameStart = "Good luck!";
-	//GenerateGraphics TextObj;
-	//TextObj.printText(sayAtGameStart, RED, 90, 10000);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //changing colour back
 	SetConsoleTextAttribute(hConsole, 11);
-	while (inGame) {
-		system("cls");																
-		
-
-		userInput();																//check for controls - will change array value accordingly
-		gameLogic();																//check for array value for key input - will draw character accordingly
-		for (int printGameMap = 0; printGameMap < 20; printGameMap++) {				//prints mapp array each frame.
-			std::cout << gameMap[printGameMap] << std::endl;
-		}
-		system("pause>nul");														//pause and wait for everything - you're moma accordingly 
+	system("cls");																
+	for (int printGameMap = 0; printGameMap < 20; printGameMap++) {
+		std::cout << gameMap[printGameMap] << std::endl;
 	}
 }
 
@@ -243,13 +227,16 @@ int main()
 	SetConsoleTitle(TEXT("daerware (the game)"));
 
 	//1. call intro function through GenerateGraphics class
-	//GenerateGraphics startObj;
-	//startObj.printText(daerwareText, CYAN, 5, 500);
+	GenerateGraphics startObj;
+	startObj.printText(daerwareText, Cyan, 5, 500);
+	system("cls");
+	startObj.printText(sayAtGameStart, Red, 90, 10000);
 	//2. when passed condition of intro function, call render game
-	renderGame();
-	//while (inMenu) { //reminder: inMenu is false right now
-	//
-	//}
-
+	while (inGame) {
+		userInput();															//check for controls - will change array value accordingly
+		gameLogic();															//check for array value for key input - will draw character accordingly
+		renderGame();															//prints map array each frame.
+		system("pause>nul");													//pause and wait for everything - you're moma accordingly
+	}
 	
 }

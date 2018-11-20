@@ -20,7 +20,7 @@ GenerateGraphics::GenerateGraphics()
 	
 }
 
-void GenerateGraphics::printText(std::string the_text, int& whatColour, int sleepTime, int pauseAfter){
+void GenerateGraphics::printText(std::string the_text, int whatColour, int sleepTime, int pauseAfter){
 	int x = 0; 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, whatColour);
